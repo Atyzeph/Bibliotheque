@@ -2,7 +2,6 @@ package fr.diginamic.jpa.entities;
 
 import java.util.Date;
 import java.util.Set;
-
 import javax.persistence.*;
 
 @Entity

@@ -81,18 +81,50 @@ public class ClientDao extends Dao implements Idao<Client>{
 
 	public Client getOne(Client e) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = null;
+		try {
+			em = fd.getEm();
+			TypedQuery<Client> tpq = em.createQuery("SELECT c FROM Client c WHERE c.id = :id", Client.class);
+			tpq.setParameter("id", e.getId());
+			return tpq.getResultList().get(0);
+		} catch (Exception e2) {
+			// TODO: handle exception
+			throw new Exception(e2.getMessage());
+		} finally {
+			fd.close(em);
+		}
 	}
 
 	public List<Client> getAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		EntityManager em = null;
+		try {
+			em = fd.getEm();
+			TypedQuery<Client> tpq = em.createQuery("SELECT c FROM Client c", Client.class);
+			return tpq.getResultList();
+		} catch (Exception e2) {
+			// TODO: handle exception
+			throw new Exception(e2.getMessage());
+		} finally {
+			fd.close(em);
+		}
 	}
 	
 	public List<Emprunt> getEmprunts(Client e) throws Exception {
-		TypedQuery<Emprunt> tpq = fd.getEm().createNamedQuery("Client.getEmprunts", Emprunt.class);
-		tpq.setParameter("id", e.getId());
-		return tpq.getResultList();
+		
+		EntityManager em = null;
+		try {
+			em = fd.getEm();
+			TypedQuery<Emprunt> tpq = em.createQuery("SELECT e FROM Emprunt e WHERE :client MEMBER OF e.idClient", Emprunt.class);
+			tpq.setParameter("id", e.getId());
+			return tpq.getResultList();
+		} catch (Exception e2) {
+			// TODO: handle exception
+			throw new Exception(e2.getMessage());
+		} finally {
+			fd.close(em);
+		}
+
 	}
 
 }
