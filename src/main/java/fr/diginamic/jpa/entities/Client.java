@@ -18,10 +18,11 @@ public class Client {
 	@Column(name = "PRENOM", length = 50, nullable = false)
 	private String prenom;
 	
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "idClient")
 	private Set<Emprunt> emprunts;
 
 	public Client() {
+		
 	}
 
 	public int getId() {

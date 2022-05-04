@@ -4,19 +4,17 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 import fr.diginamic.jpa.dao.Idao;
-import fr.diginamic.jpa.entities.Client;
-import fr.diginamic.jpa.entities.Emprunt;
+import fr.diginamic.jpa.entities.Livre;
 
-public class ClientDao extends Dao implements Idao<Client>{
+public class LivreDao extends Dao implements Idao<Livre>{
 
-	public ClientDao(FactoryDao fd) {
+	public LivreDao(FactoryDao fd) {
 		super(fd);
 		// TODO Auto-generated constructor stub
 	}
 
-	public boolean add(Client e) throws Exception {
+	public boolean add(Livre e) throws Exception {
 		// TODO Auto-generated method stub
 		EntityManager em = null;
 		try {
@@ -33,16 +31,17 @@ public class ClientDao extends Dao implements Idao<Client>{
 		return false;
 	}
 
-	public boolean update(Client e) throws Exception {
+	public boolean update(Livre e) throws Exception {
 		// TODO Auto-generated method stub
 		EntityManager em = null;
 		try {
 			em = fd.getEm();
 			em.getTransaction().begin();
-			Client etrans = em.find(Client.class, e.getId());
+			Livre etrans = em.find(Livre.class, e.getId());
 			
 			if (etrans != null) {
-				etrans.setNom(e.getNom());
+				etrans.setAuteur(e.getAuteur());
+				etrans.setTitre(e.getTitre());
 				em.merge(etrans);
 				em.getTransaction().commit();
 				
@@ -56,13 +55,13 @@ public class ClientDao extends Dao implements Idao<Client>{
 		return false;
 	}
 
-	public boolean delete(Client e) throws Exception {
+	public boolean delete(Livre e) throws Exception {
 		// TODO Auto-generated method stub
 		EntityManager em = null;
 		try {
 			 em = fd.getEm();
 			 em.getTransaction().begin();
-			 e = em.find(Client.class, e.getId());
+			 e = em.find(Livre.class, e.getId());
 			 if(e != null) {
 					 em.remove(e);
 					 em.getTransaction().commit();
@@ -79,20 +78,14 @@ public class ClientDao extends Dao implements Idao<Client>{
 		}
 	}
 
-	public Client getOne(Client e) throws Exception {
+	public Livre getOne(Livre e) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Client> getAll() throws Exception {
+	public List<Livre> getAll() throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		TypedQuery<Livre> tqb = fd.getEm().createQuery("select liv from Livre liv", Livre.class);
+		return tqb.getResultList();
 	}
-	
-	public List<Emprunt> getEmprunts(Client e) throws Exception {
-		TypedQuery<Emprunt> tpq = fd.getEm().createNamedQuery("Client.getEmprunts", Emprunt.class);
-		tpq.setParameter("id", e.getId());
-		return tpq.getResultList();
-	}
-
 }
