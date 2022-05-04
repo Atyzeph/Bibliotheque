@@ -10,8 +10,8 @@ public class TestBibliotheque {
 	public static void main(String[] args) {
 		try {
 			TestBibliotheque.BIBLIOTHEQUE = new FactoryDao("bddBibliotheque");
-			ClientDao cdo = new ClientDao(new FactoryDao("bddBibliotheque"));
-			EmpruntDao edo = new EmpruntDao(new FactoryDao("bddBibliotheque"));
+			ClientDao cdo = new ClientDao(TestBibliotheque.BIBLIOTHEQUE);
+			EmpruntDao edo = new EmpruntDao(BIBLIOTHEQUE);
 			
 			edo.getAll().forEach(eoi -> {
 				System.out.println(eoi);
