@@ -18,21 +18,25 @@ public class TestBibliotheque {
 			EmpruntDao edo = new EmpruntDao(BIBLIOTHEQUE);
 			Client c = new Client();
 			
-			// id client
+			// Entrez un id client
 			c.setId(2);
 			 
 			// Extraction des emprunts
 			cdo.getOne(c).getEmprunts().forEach(e -> {
+				
 				System.out.println(e.getId());
 				Iterator<Compo> ic = e.getIdCompo().iterator();
+				
 				while (ic.hasNext()) {
 					Compo co = ic.next();
 					
 					if (co != null) {
-					System.out.println(co.getIdLivre().getTitre());
+						System.out.println(co.getIdLivre().getTitre());
 					}
 				}
 			});
+			
+			
 			
 			// List<Emprunt> emp = cdo.getEmprunts();
 			
