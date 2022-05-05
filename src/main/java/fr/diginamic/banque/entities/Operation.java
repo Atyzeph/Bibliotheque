@@ -9,7 +9,7 @@ public class Operation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int idOperation;
 	
 	@Column(name = "date", nullable = false)
 	private LocalDate date;
@@ -23,12 +23,12 @@ public class Operation {
 	public Operation() {
 	}
 
-	public int getId() {
-		return id;
+	public int getIdOperation() {
+		return idOperation;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setIdOperation(int id) {
+		this.idOperation = id;
 	}
 
 	public LocalDate getDate() {
