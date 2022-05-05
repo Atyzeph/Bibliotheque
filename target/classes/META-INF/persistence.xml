@@ -4,6 +4,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
     http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+    
+    <!-- Bdd bibliotheque -->
 	<persistence-unit name="bddBibliotheque"
 		transaction-type="RESOURCE_LOCAL">
 		<properties>
@@ -18,6 +20,40 @@
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- 'validate' en prod -->
+			<!-- 'create' ou 'create-drop' en mode dev ou test -->
+		</properties>
+	</persistence-unit>
+	<!-- Bdd banque -->
+	<persistence-unit name="bddBanquem02"
+		transaction-type="RESOURCE_LOCAL">
+		<!-- Permet d'intégrer les classes utilisées pour la deuxième bdd -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+			<class>fr.diginamic.banque.entities.Compte</class>
+			<class>fr.diginamic.banque.entities.Operation</class>
+			<class>fr.diginamic.banque.entities.Clients</class>
+			<class>fr.diginamic.banque.entities.Banque</class>
+			<class>fr.diginamic.banque.entities.Adresse</class>
+			<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<!-- desactiver l'autodetection des classes de type @Entity -->
+			<!-- <property name="hibernate.archive.autodetection" value="" /> -->
+			<!-- Activation de la génération des tables manquantes uniquement -->
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+		
+			<property name="javax.persistence.jdbc.driver"
+				value="org.mariadb.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mariadb://localhost:3306/banquem02" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="" />
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<!-- Permet de générer les tables à chaque reload reboot de l'app -->
+			<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
 			<!-- 'validate' en prod -->
 			<!-- 'create' ou 'create-drop' en mode dev ou test -->
 		</properties>
