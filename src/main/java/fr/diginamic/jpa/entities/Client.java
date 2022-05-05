@@ -18,7 +18,7 @@ public class Client {
 	@Column(name = "PRENOM", length = 50, nullable = false)
 	private String prenom;
 	
-	@OneToMany(mappedBy = "idClient")
+	@OneToMany(mappedBy = "idClient", fetch = FetchType.EAGER)
 	private Set<Emprunt> emprunts;
 
 	public Client() {

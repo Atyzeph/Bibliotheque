@@ -1,9 +1,12 @@
 package fr.diginamic.jpa;
 
+import java.util.Iterator;
+
 import fr.diginamic.jpa.dao.impl.ClientDao;
 import fr.diginamic.jpa.dao.impl.EmpruntDao;
 import fr.diginamic.jpa.dao.impl.FactoryDao;
 import fr.diginamic.jpa.entities.Client;
+import fr.diginamic.jpa.entities.Compo;
 
 public class TestBibliotheque {
 	public static FactoryDao BIBLIOTHEQUE;
@@ -15,9 +18,21 @@ public class TestBibliotheque {
 			EmpruntDao edo = new EmpruntDao(BIBLIOTHEQUE);
 			Client c = new Client();
 			
-			c.setId(1);
+			// id client
+			c.setId(2);
 			 
-			System.out.println(cdo.getOne(c).getEmprunts().size());
+			// Extraction des emprunts
+			cdo.getOne(c).getEmprunts().forEach(e -> {
+				System.out.println(e.getId());
+				Iterator<Compo> ic = e.getIdCompo().iterator();
+				while (ic.hasNext()) {
+					Compo co = ic.next();
+					
+					if (co != null) {
+					System.out.println(co.getIdLivre().getTitre());
+					}
+				}
+			});
 			
 			// List<Emprunt> emp = cdo.getEmprunts();
 			

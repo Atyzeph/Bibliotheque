@@ -1,5 +1,6 @@
 package fr.diginamic.jpa.entities;
 
+import java.lang.ProcessBuilder.Redirect.Type;
 import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Emprunt {
 	@JoinColumn(name = "ID_CLIENT")
 	private Client idClient;
 	
-	@OneToMany(mappedBy = "idEmp")
+	@OneToMany(mappedBy = "idEmp", fetch = FetchType.EAGER)
 	private Set<Compo> idCompo;
 	
 	public Emprunt() {
@@ -71,5 +72,13 @@ public class Emprunt {
 
 	public void setIdClient(Client idClient) {
 		this.idClient = idClient;
+	}
+
+	public Set<Compo> getIdCompo() {
+		return idCompo;
+	}
+
+	public void setIdCompo(Set<Compo> idCompo) {
+		this.idCompo = idCompo;
 	}
 }
