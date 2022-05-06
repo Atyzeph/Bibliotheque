@@ -1,6 +1,8 @@
 package fr.diginamic.banque.entities;
 
 import java.time.LocalDate;
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -19,10 +21,27 @@ public class Operation {
 	
 	@Column(name = "motif", length = 255, nullable = false)
 	private String motif;
+	
+	@OneToMany(mappedBy = "Operation")
+	@JoinColumn(name = "idOperation")
+	private Set<Compte> comptes;
 
 	public Operation() {
 	}
+	
+	
+	// Avec contraintes
+	public Operation(int idOperation, LocalDate date, double montant, String motif, Set<Compte> comptes) {
+		super();
+		this.idOperation = idOperation;
+		this.date = date;
+		this.montant = montant;
+		this.motif = motif;
+		this.comptes = comptes;
+	}
 
+
+	// Sans contraintes
 	public Operation(LocalDate date, double montant, String motif) {
 		super();
 		this.date = date;
@@ -60,5 +79,13 @@ public class Operation {
 
 	public void setMotif(String motif) {
 		this.motif = motif;
+	}
+
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(Set<Compte> comptes) {
+		this.comptes = comptes;
 	}
 }

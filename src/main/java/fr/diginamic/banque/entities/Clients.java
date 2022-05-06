@@ -1,6 +1,7 @@
 package fr.diginamic.banque.entities;
 
 import java.time.LocalDate;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -21,12 +22,33 @@ public class Clients {
 	@Column(name = "dateNaissance", nullable = false)
 	private LocalDate dateNaissance;
 	
+	@OneToMany(mappedBy = "clients")
+	@JoinColumn(name = "idBanque")
+	private Set<Banque> banques;
+	
+	@OneToMany(mappedBy = "clients")
+	@JoinColumn(name = "idCompte")
+	private Set<Compte> comptes;
+	
+	
 	@Embedded
 	private Adresse adresse;
 
 	public Clients() {
 	}	
 
+	// Avec contraintes
+	public Clients(String nom, String prenom, LocalDate dateNaissance, Set<Banque> banques, Set<Compte> comptes, Adresse adresse) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.banques = banques;
+		this.comptes = comptes;
+		this.adresse = adresse;
+	}
+
+	// Sans contraintes
 	public Clients(String nom, String prenom, LocalDate dateNaissance, Adresse adresse) {
 		super();
 		this.nom = nom;
@@ -73,5 +95,21 @@ public class Clients {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+
+	public Set<Banque> getBanques() {
+		return banques;
+	}
+
+	public void setBanques(Set<Banque> banques) {
+		this.banques = banques;
+	}
+
+	public Set<Compte> getComptes() {
+		return comptes;
+	}
+
+	public void setComptes(Set<Compte> comptes) {
+		this.comptes = comptes;
 	}
 }
