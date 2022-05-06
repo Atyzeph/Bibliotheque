@@ -10,9 +10,9 @@ import fr.diginamic.jpa.dao.impl.Dao;
 import fr.diginamic.jpa.dao.impl.FactoryDao;
 import fr.diginamic.banque.entities.Clients;
 
-public class ClientDao extends Dao implements Idao<Clients>{
+public class ClientsDao extends Dao implements Idao<Clients>{
 
-	public ClientDao(FactoryDao fd) {
+	public ClientsDao(FactoryDao fd) {
 		super(fd);
 		// TODO Auto-generated constructor stub
 	}
@@ -43,7 +43,10 @@ public class ClientDao extends Dao implements Idao<Clients>{
 			Clients etrans = em.find(Clients.class, e.getId());
 			
 			if (etrans != null) {
+				
 				etrans.setNom(e.getNom());
+				etrans.setPrenom(e.getPrenom());
+				etrans.setDateNaissance(e.getDateNaissance());
 				em.merge(etrans);
 				em.getTransaction().commit();
 				
