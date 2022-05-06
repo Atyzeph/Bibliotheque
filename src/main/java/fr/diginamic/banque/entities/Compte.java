@@ -19,7 +19,12 @@ public class Compte {
 	public Compte() {
 	}
 	
-	
+	public Compte(String numero, double solde) {
+		super();
+		this.numero = numero;
+		this.solde = solde;
+	}
+
 	public int getIdCompte() {
 		return idCompte;
 	}

@@ -25,6 +25,14 @@ public class Clients {
 	private Adresse adresse;
 
 	public Clients() {
+	}	
+
+	public Clients(String nom, String prenom, LocalDate dateNaissance, Adresse adresse) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.adresse = adresse;
 	}
 
 	public int getId() {

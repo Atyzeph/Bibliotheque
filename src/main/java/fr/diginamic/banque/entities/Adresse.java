@@ -13,6 +13,14 @@ public class Adresse {
 	public Adresse() {
 	}
 
+	public Adresse(int numero, String rue, int codePostale, String ville) {
+		super();
+		this.numero = numero;
+		this.rue = rue;
+		this.codePostale = codePostale;
+		this.ville = ville;
+	}
+
 	public int getNumero() {
 		return numero;
 	}

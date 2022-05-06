@@ -16,6 +16,10 @@ public class Banque {
 	public Banque() {
 	}
 	
+	public Banque(String nom) {
+		super();
+		this.nom = nom;
+	}
 
 	public int getIdBanque() {
 		return idBanque;
