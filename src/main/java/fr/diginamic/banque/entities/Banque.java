@@ -14,7 +14,7 @@ public class Banque {
 	private String nom;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
+	@JoinColumn(name = "id") // id client dans la bdd
 	private Clients clients;
 
 	public Banque() {

@@ -23,7 +23,6 @@ public class Operation {
 	private String motif;
 	
 	@OneToMany(mappedBy = "Operation")
-	@JoinColumn(name = "idOperation")
 	private Set<Compte> comptes;
 
 	public Operation() {

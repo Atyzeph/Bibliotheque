@@ -23,11 +23,9 @@ public class Clients {
 	private LocalDate dateNaissance;
 	
 	@OneToMany(mappedBy = "clients")
-	@JoinColumn(name = "idBanque")
 	private Set<Banque> banques;
 	
 	@OneToMany(mappedBy = "clients")
-	@JoinColumn(name = "idCompte")
 	private Set<Compte> comptes;
 	
 	
@@ -36,15 +34,15 @@ public class Clients {
 
 	public Clients() {
 	}	
-
+	
 	// Avec contraintes
-	public Clients(String nom, String prenom, LocalDate dateNaissance, Set<Banque> banques, Set<Compte> comptes, Adresse adresse) {
+	public Clients(String nom, String prenom, LocalDate dateNaissance, Banque banque, Compte compte, Adresse adresse) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
-		this.banques = banques;
-		this.comptes = comptes;
+		this.banques.add(banque);
+		this.comptes.add(compte);
 		this.adresse = adresse;
 	}
 

@@ -19,7 +19,6 @@ public class Compte {
 	private double solde;
 	
 	@OneToMany(mappedBy = "compte")
-	@JoinColumn(name = "id")
 	private Set<Clients> clientss;
 
 	@OneToOne

@@ -1,6 +1,9 @@
 package fr.diginamic.jpa;
 
 import java.time.LocalDate;
+import java.util.Iterator;
+import java.util.Set;
+
 import fr.diginamic.banque.entities.*;
 import fr.diginamic.jpa.dao.banque.impl.*;
 import fr.diginamic.jpa.dao.impl.FactoryDao;
@@ -19,12 +22,15 @@ public class TestBanque {
 			CompteDao cptdao = new CompteDao(TestBanque.BANQUE);
 			OperationDao opdao = new OperationDao(TestBanque.BANQUE);
 			
-			Adresse adr = new Adresse(8, "Rue de la Paix", 75000, "Paris");
-			Clients c = new Clients("Martin", "Alice", date, adr);
-			
-			Banque bq = new Banque("Crédit Mutuel");
-			Compte cpt = new Compte("4895 5050 7852 6574", 2000);
+
 			Operation op = new Operation(date, 2000, "Offre de bienvenue");
+			Banque bq = new Banque("Crédit Mutuel");
+			
+			Compte cpt = new Compte("4895 5050 7852 6574", 2000);
+			Adresse adr = new Adresse(8, "Rue de la Paix", 75000, "Paris");
+			Clients c = new Clients("Martin", "Alice", date, bq, cpt, adr);
+			
+			
 			
 			cdao.add(c);
 			bqdao.add(bq);
