@@ -1,5 +1,6 @@
 package fr.diginamic.banque.entities;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -18,8 +19,19 @@ public class Compte {
 	@Column(name = "solde", length = 50, nullable = false)
 	private double solde;
 	
-	@OneToMany(mappedBy = "compte")
-	private Set<Clients> clientss;
+	@ManyToMany
+	@JoinTable(
+			name = "clients_cpt", 
+			joinColumns = @JoinColumn(
+					name="ID_CPT", 
+					referencedColumnName = "idCompte"
+					),
+	inverseJoinColumns = @JoinColumn(
+			name = "ID_CLI", 
+			referencedColumnName = "id"
+			)
+	)
+	private Set<Clients> clientss = new HashSet<>();
 
 	@OneToOne
 	private Operation operation;
@@ -77,6 +89,10 @@ public class Compte {
 
 	public void setClientss(Set<Clients> clientss) {
 		this.clientss = clientss;
+	}
+	
+	public void setClient(Clients client) {
+		this.clientss.add(client);
 	}
 
 

@@ -22,10 +22,11 @@ public class Clients {
 	@Column(name = "dateNaissance", nullable = false)
 	private LocalDate dateNaissance;
 	
-	@OneToMany(mappedBy = "clients")
-	private Set<Banque> banques;
+	@ManyToOne
+	@JoinColumn(name = "idBanque")
+	private Banque banques;
 	
-	@OneToMany(mappedBy = "clients")
+	@ManyToMany(mappedBy = "clientss")
 	private Set<Compte> comptes;
 	
 	
@@ -41,10 +42,20 @@ public class Clients {
 		this.nom = nom;
 		this.prenom = prenom;
 		this.dateNaissance = dateNaissance;
-		this.banques.add(banque);
+		this.banques = banque;
 		this.comptes.add(compte);
 		this.adresse = adresse;
 	}
+	
+	public Clients(String nom, String prenom, LocalDate dateNaissance, Banque banque, Adresse adresse) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+		this.dateNaissance = dateNaissance;
+		this.banques = banque;
+		this.adresse = adresse;
+	}
+
 
 	// Sans contraintes
 	public Clients(String nom, String prenom, LocalDate dateNaissance, Adresse adresse) {
@@ -95,11 +106,11 @@ public class Clients {
 		this.adresse = adresse;
 	}
 
-	public Set<Banque> getBanques() {
+	public Banque getBanques() {
 		return banques;
 	}
 
-	public void setBanques(Set<Banque> banques) {
+	public void setBanques(Banque banques) {
 		this.banques = banques;
 	}
 

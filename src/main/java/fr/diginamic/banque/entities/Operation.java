@@ -22,7 +22,7 @@ public class Operation {
 	@Column(name = "motif", length = 255, nullable = false)
 	private String motif;
 	
-	@OneToMany(mappedBy = "Operation")
+	@OneToMany(mappedBy = "operation")
 	private Set<Compte> comptes;
 
 	public Operation() {

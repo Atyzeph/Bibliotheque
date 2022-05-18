@@ -1,5 +1,7 @@
 package fr.diginamic.banque.entities;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,16 +15,16 @@ public class Banque {
 	@Column(name = "nom", length = 50, nullable = false )
 	private String nom;
 	
-	@ManyToOne
+	@OneToMany
 	@JoinColumn(name = "id") // id client dans la bdd
-	private Clients clients;
+	private Set<Clients> clients;
 
 	public Banque() {
 	}
 	
 	
 	// Avec contraintes
-	public Banque(int idBanque, String nom, Clients clients) {
+	public Banque(int idBanque, String nom, Set<Clients> clients) {
 		super();
 		this.idBanque = idBanque;
 		this.nom = nom;
@@ -52,11 +54,11 @@ public class Banque {
 		this.nom = nom;
 	}
 
-	public Clients getClients() {
+	public Set<Clients> getClients() {
 		return clients;
 	}
 
-	public void setClients(Clients clients) {
+	public void setClients(Set<Clients> clients) {
 		this.clients = clients;
 	}
 }
